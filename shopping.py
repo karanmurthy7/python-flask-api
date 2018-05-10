@@ -20,6 +20,10 @@ def remove_item(name):
         shopping_list.remove(name)
     return redirect(url_for('index'))
 
+@app.route('/api/items')
+def get_items():
+    global shopping_list
+    return jsonify({'items': shopping_list})
 
 if __name__=='__main__':
     app.run(debug=True)
