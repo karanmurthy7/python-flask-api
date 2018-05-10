@@ -1,11 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
 shopping_list = ['Milk', 'Eggs']
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def index():
+    global shopping_list
+    if request.method == 'POST':
+        shopping_list.append(request.form['item'])
     return render_template('index.html', items=shopping_list)
 
 if __name__ == '__main__':
